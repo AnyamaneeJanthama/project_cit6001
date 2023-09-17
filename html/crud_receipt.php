@@ -15,6 +15,8 @@ if ($case == '1') {
     $result_value = mysqli_query($conn, "SELECT * FROM `project_hd` JOIN project_desc USING(headcode) WHERE project_hd.void =0 AND project_hd.headcode ='$id' ");
     $row = mysqli_fetch_array($result);
     $row_ = mysqli_fetch_array($result_hd);
+    $nn = mysqli_query($conn, "SELECT *,concat(SUBSTRING(datesave,9,2),SUBSTRING(datesave,6,2),headcode) as no_ FROM `project_hd`");
+    $no = mysqli_fetch_array($nn);
 } else if ($case  == '4') {
     $header = 'รายละเอียด';
     $id = $_GET['id'];
@@ -24,6 +26,8 @@ if ($case == '1') {
     $result_value = mysqli_query($conn, "SELECT * FROM `project_hd` JOIN project_desc USING(headcode) WHERE project_hd.void =0 AND project_hd.headcode ='$id' ");
     $row = mysqli_fetch_array($result);
     $row_ = mysqli_fetch_array($result_hd);
+    $nn = mysqli_query($conn, "SELECT *,concat(SUBSTRING(datesave,9,2),SUBSTRING(datesave,6,2),headcode) as no_ FROM `project_hd`");
+    $no = mysqli_fetch_array($nn);
 }
 ?>
 
@@ -63,6 +67,9 @@ if ($case == '1') {
                 <div class="row">
                     <div class="col-12 order-2 order-md-3 order-lg-2 mb-4">
                         <div class="card mb-3">
+                            <div class="text-end mt-3 mr-3">NO.
+                                <?php echo ($case == 4) ? $no['no_'] : '' ?>
+                            </div>
                             <div class="card-header text-center">
                                 <h3><?php echo $header; ?>ข้อมูลค่าใช้จ่ายโครงการ</h3>
                             </div>
