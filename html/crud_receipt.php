@@ -6,27 +6,22 @@ if ($case == '1') {
     $header = 'บันทึก';
     $id = '';
     $result_ = mysqli_query($conn, "SELECT * FROM project WHERE void = 0");
-} else if ($case  == '2') {
-    $header = 'แก้ไข';
+} else if ($case  == '3') {
+    $header = 'ลบ';
     $id = $_GET['id'];
     $result = mysqli_query($conn, "SELECT * FROM project_hd WHERE headcode ='$id' ");
     $result_ = mysqli_query($conn, "SELECT * FROM project JOIN customer USING(cus_id) WHERE project_id AND project.void = 0");
     $result_hd = mysqli_query($conn, "SELECT * FROM `project_hd` JOIN project USING(project_id) JOIN customer USING(cus_id) WHERE project_hd.void = 0");
-    $result_value = mysqli_query($conn, "SELECT * FROM `project_hd` JOIN project_desc USING(headcode) WHERE project_hd.void =0");
+    $result_value = mysqli_query($conn, "SELECT * FROM `project_hd` JOIN project_desc USING(headcode) WHERE project_hd.void =0 AND project_hd.headcode ='$id' ");
     $row = mysqli_fetch_array($result);
     $row_ = mysqli_fetch_array($result_hd);
-} else if ($case  == '3') {
-    $header = 'ลบ';
-    $id = $_GET['id'];
-    $result = mysqli_query($conn, "SELECT * FROM project_hd WHERE headcode ='$id'");
-    $row = mysqli_fetch_array($result);
 } else if ($case  == '4') {
     $header = 'รายละเอียด';
     $id = $_GET['id'];
     $result = mysqli_query($conn, "SELECT * FROM project_hd WHERE headcode ='$id' ");
     $result_ = mysqli_query($conn, "SELECT * FROM project JOIN customer USING(cus_id) WHERE project_id AND project.void = 0");
     $result_hd = mysqli_query($conn, "SELECT * FROM `project_hd` JOIN project USING(project_id) JOIN customer USING(cus_id) WHERE project_hd.void = 0");
-    $result_value = mysqli_query($conn, "SELECT * FROM `project_hd` JOIN project_desc USING(headcode) WHERE project_hd.void =0");
+    $result_value = mysqli_query($conn, "SELECT * FROM `project_hd` JOIN project_desc USING(headcode) WHERE project_hd.void =0 AND project_hd.headcode ='$id' ");
     $row = mysqli_fetch_array($result);
     $row_ = mysqli_fetch_array($result_hd);
 }
@@ -109,11 +104,11 @@ if ($case == '1') {
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="cus_id" class="form-label">ชื่อลูกค้า</label>
-                                            <input type="text" class="form-control" name="cus_id" id="project_name_display" value="<?php echo ($case == '2' || $case == '3' || $case == '4') ?  $row_['cus_firstname'] . " " . $row_['cus_lastname']  : '' ?>" readonly>
+                                            <input type="text" class="form-control" name="cus_id" id="project_name_display" value="<?php echo ($case == '3' || $case == '4') ?  $row_['cus_firstname'] . " " . $row_['cus_lastname']  : '' ?>" readonly>
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
-                                            <label for="totalprice" class="form-label">มูลค่า</label>
-                                            <input type="text" class="form-control" name="totalprice" id="project_price_display" value="<?php echo ($case == '2' || $case == '3' || $case == '4') ?  $row_['totalprice'] : '' ?>" readonly>
+                                            <label for="totalprice" class="form-label">มูลค่าโครงการ</label>
+                                            <input type="text" class="form-control" name="totalprice" id="project_price_display" value="<?php echo ($case == '3' || $case == '4') ?  $row_['totalprice'] : '' ?>" readonly>
                                         </div>
                                     </div>
 
@@ -127,30 +122,37 @@ if ($case == '1') {
                                                 <?php echo ($case == 1) ? '<th><button type="button" class="btn btn-info" onclick="addInputFields()">เพิ่ม</button></th>' : ''; ?>
                                             </tr>
                                         </thead>
-                                        <?php
-                                        if ($case == 1) {
+                                        <tbody>
+                                            <?php
+                                            if ($case == 1) {
+                                                echo '
+                                                   ';
+                                            } elseif ($case == 4) {
+                                                $sum = 0;
 
-                                            echo '<tbody>
-                                                        <tr>
-                                                            <td><input type="text" class="form-control" name="s_id[]" placeholder="รหัสสินค้า"></td>
-                                                            <td><input type="text" class="form-control" name="qty[]" placeholder="จำนวน"></td>
-                                                            <td><input type="text" class="form-control" name="s_price[]" placeholder="ราคา/หน่วย"></td>
-                                                            <td><input type="text" class="form-control" name="totalprice[]" placeholder="จำนวนเงิน"></td>
-                                                        </tr>
-                                                    </tbody>';
-                                        } elseif ($case == 4) {
-                                            foreach ($result_value as $rowselect) {
-                                                echo '<tbody>
-                                                            <tr>
-                                                                <td><input type="text" class="form-control" readonly value="' . $rowselect["s_id"] . '"></td>
-                                                                <td><input type="text" class="form-control" readonly value="' . $rowselect["qty"] . '"></td>
-                                                                <td><input type="text" class="form-control" readonly value="' . $rowselect["s_price"] . '"></td>
-                                                                <td><input type="text" class="form-control" readonly value="' . $rowselect["totalprice"] . '"></td>
-                                                            </tr>
-                                                        </tbody>';
+                                                foreach ($result_value as $rowselect) {
+                                                    $sum += $rowselect["totalprice"];
+                                            ?>
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" readonly value="<?php echo $rowselect["s_id"] ?>"></td>
+                                                        <td><input type="text" class="form-control" readonly value="<?php echo $rowselect["qty"] ?>"></td>
+                                                        <td><input type="text" class="form-control" readonly value="<?php echo $rowselect["s_price"] ?>"></td>
+                                                        <td><input type="text" class="form-control" readonly value="<?php echo $rowselect["totalprice"] ?>"></td>
+                                                    </tr>
+                                            <?php
+                                                }
                                             }
-                                        }
-                                        ?>
+                                            ?>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th class="text-center">รวมมูลค่าสินค้า</th>
+                                                    <th class="text-center" id="grandTotal">
+                                                        <?php echo ($case == 4) ? $sum : '' ?></th>
+                                                </tr>
+                                            </thead>
+                                        </tbody>
                                     </table>
                                     <div class="mt-2">
                                         <?php
@@ -173,6 +175,86 @@ if ($case == '1') {
 
             </div>
             <!-- End of Main Content -->
+
+            <script>
+                function updateRowResult(row) {
+                    const num1 = parseFloat(row.querySelector('.qty').value) || 0;
+                    const num2 = parseFloat(row.querySelector('.s_price').value) || 0;
+                    const result = num1 * num2;
+
+                    row.querySelector('.totalprice').value = result;
+                }
+
+                // เพิ่มrow tableใหม่
+                function updateRowResult(row) {
+                    const num1 = parseFloat(row.querySelector('.qty').value) || 0;
+                    const num2 = parseFloat(row.querySelector('.s_price').value) || 0;
+                    const result = num1 * num2;
+
+                    row.querySelector('.totalprice').value = result;
+
+                    // รวมค่า
+                    calculateGrandTotal();
+                }
+
+                // รวมค่าทุกrow
+                function calculateGrandTotal() {
+                    const totalpriceInputs = document.querySelectorAll('.totalprice');
+                    let grandTotal = 0;
+
+                    totalpriceInputs.forEach(input => {
+                        const value = parseFloat(input.value) || 0;
+                        grandTotal += value;
+                    });
+
+                    // ผลลัพ
+                    document.getElementById('grandTotal').textContent = grandTotal;
+                }
+
+                // เพิ่มrow tableใหม่
+                function addInputFields() {
+                    const table = document.querySelector('table');
+
+                    // เช็คให้สร้างtbodyแค่ตัวเดียว
+                    let tbody = table.querySelector('tbody');
+                    if (!tbody) {
+                        tbody = document.createElement('tbody');
+                        table.appendChild(tbody);
+                    }
+
+                    const newRow = document.createElement('tr');
+
+                    const fieldNames = ['s_id', 'qty', 's_price', 'totalprice'];
+                    const field_holder = ['รหัสสินค้า', 'จำนวน', 'ราคา/หน่วย', 'จำนวนเงิน'];
+
+                    for (let i = 0; i < fieldNames.length; i++) {
+                        const newCell = document.createElement('td');
+                        const newInput = document.createElement('input');
+                        newInput.type = 'text';
+                        newInput.name = `${fieldNames[i]}[]`;
+                        newInput.className = `form-control ${fieldNames[i]}`;
+                        newInput.placeholder = `${field_holder[i]}`;
+
+                        // เพิ่ม readonly
+                        if (fieldNames[i] === 'totalprice') {
+                            newInput.readOnly = true;
+                        }
+
+                        newCell.appendChild(newInput);
+                        newRow.appendChild(newCell);
+
+                        // คูณค่าใน row table ใหม่
+                        if (fieldNames[i] === 'qty' || fieldNames[i] === 's_price') {
+                            newInput.addEventListener('input', function() {
+                                updateRowResult(newRow);
+                            });
+                        }
+                    }
+
+                    tbody.appendChild(newRow);
+                }
+            </script>
+
             <script>
                 // เลือกรหัสโครงการ
                 var projectSelect = document.getElementById('project_id');
@@ -200,36 +282,6 @@ if ($case == '1') {
                     });
 
                 });
-
-                // multi insrt
-                function addInputFields() {
-                    const table = document.querySelector('table');
-
-                    // Check if a tbody element exists, and create one if it doesn't
-                    let tbody = table.querySelector('tbody');
-                    if (!tbody) {
-                        tbody = document.createElement('tbody');
-                        table.appendChild(tbody);
-                    }
-
-                    const newRow = document.createElement('tr');
-
-                    const fieldNames = ['s_id', 'qty', 's_price', 'totalprice'];
-                    const field_holder = ['รหัสสินค้า', 'จำนวน', 'ราคา/หน่วย', 'จำนวนเงิน'];
-
-                    for (let i = 0; i < fieldNames.length; i++) {
-                        const newCell = document.createElement('td');
-                        const newInput = document.createElement('input');
-                        newInput.type = 'text';
-                        newInput.name = `${fieldNames[i]}[]`;
-                        newInput.className = 'form-control';
-                        newInput.placeholder = `${field_holder[i]}`;
-                        newCell.appendChild(newInput);
-                        newRow.appendChild(newCell);
-                    }
-
-                    tbody.appendChild(newRow);
-                }
             </script>
 
             <script>

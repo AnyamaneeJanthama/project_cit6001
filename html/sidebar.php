@@ -58,6 +58,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <span class="fs-6">ข้อมูลค่าใช้จ่ายโครงการ</span>
         </a>
     </li>
+    <li
+        class="nav-item <?php echo ($currentPage == 'project_close.php' || $currentPage == 'crud_close.php') ? "active" : ""; ?>">
+        <a class="nav-link" href="project_close.php">
+            <i class="fa-solid fa-notes fs-5"></i>
+            <span class="fs-6">บันทึกปิดโครงการ</span>
+        </a>
+    </li>
 
 
     <!-- Nav Item - Utilities Collapse Menu -->
