@@ -8,7 +8,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center">
-        <div class="sidebar-brand-text mx-3">Admin</div>
+        <div class="sidebar-brand-text mx-3">Admin Project</div>
     </a>
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
@@ -23,43 +23,37 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li
-        class="nav-item <?php echo ($currentPage == 'employee.php' || $currentPage == 'crud_employee.php') ? "active" : ""; ?>">
+    <li class="nav-item <?php echo ($currentPage == 'employee.php' || $currentPage == 'crud_employee.php') ? "active" : ""; ?>">
         <a class="nav-link" href="employee.php">
             <i class="fa-solid fa-user-tie fs-5"></i>
             <span class="fs-6">ข้อมูลพนักงาน</span>
         </a>
     </li>
-    <li
-        class="nav-item <?php echo ($currentPage == 'customer.php' || $currentPage == 'crud_customer.php') ? "active" : ""; ?>">
+    <li class="nav-item <?php echo ($currentPage == 'customer.php' || $currentPage == 'crud_customer.php') ? "active" : ""; ?>">
         <a class="nav-link" href="customer.php">
             <i class="fa-duotone fa-users fs-5"></i>
             <span class="fs-6">ข้อมูลลูกค้า</span>
         </a>
     </li>
-    <li
-        class="nav-item <?php echo ($currentPage == 'stock.php' || $currentPage == 'crud_stock.php') ? "active" : ""; ?>">
+    <li class="nav-item <?php echo ($currentPage == 'stock.php' || $currentPage == 'crud_stock.php') ? "active" : ""; ?>">
         <a class="nav-link" href="stock.php">
             <i class="fa-solid fa-box fs-5"></i>
             <span class="fs-6">ข้อมูลสินค้า</span>
         </a>
     </li>
-    <li
-        class="nav-item <?php echo ($currentPage == 'project.php' || $currentPage == 'crud_project.php') ? "active" : ""; ?>">
+    <li class="nav-item <?php echo ($currentPage == 'project.php' || $currentPage == 'crud_project.php') ? "active" : ""; ?>">
         <a class="nav-link" href="project.php">
             <i class="fa-solid fa-file-chart-column fs-5"></i>
             <span class="fs-6">ข้อมูลโครงการ</span>
         </a>
     </li>
-    <li
-        class="nav-item <?php echo ($currentPage == 'receipt.php' || $currentPage == 'crud_receipt.php') ? "active" : ""; ?>">
+    <li class="nav-item <?php echo ($currentPage == 'receipt.php' || $currentPage == 'crud_receipt.php') ? "active" : ""; ?>">
         <a class="nav-link" href="receipt.php">
             <i class="fa-solid fa-file-invoice-dollar fs-5"></i>
             <span class="fs-6">ข้อมูลค่าใช้จ่ายโครงการ</span>
         </a>
     </li>
-    <li
-        class="nav-item <?php echo ($currentPage == 'project_close.php' || $currentPage == 'crud_close.php') ? "active" : ""; ?>">
+    <li class="nav-item <?php echo ($currentPage == 'project_close.php' || $currentPage == 'crud_close.php') ? "active" : ""; ?>">
         <a class="nav-link" href="project_close.php">
             <i class="fa-solid fa-notes fs-5"></i>
             <span class="fs-6">บันทึกปิดโครงการ</span>
