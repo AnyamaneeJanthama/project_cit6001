@@ -121,7 +121,32 @@ include("header.php");
                                             จำนวนโครงการ</div>
                                         <div class="mb-0 font-weight-bold text-gray-800 fs-4">
                                             <?php
-                                            $sql = "SELECT * FROM project";
+                                            $sql = "SELECT * FROM project WHERE void = '0'";
+                                            $query = $conn->query($sql);
+                                            echo "$query->num_rows";
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fa-solid fa-file-chart-column fa-3x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Pending Requests Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-dark shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-dark text-uppercase mb-1 fs-6">
+                                            จำนวนบันทึกปิดโครงการ</div>
+                                        <div class="mb-0 font-weight-bold text-gray-800 fs-4">
+                                            <?php
+                                            $sql = "SELECT * FROM project_close WHERE void = '0'";
                                             $query = $conn->query($sql);
                                             echo "$query->num_rows";
                                             ?>
@@ -135,8 +160,6 @@ include("header.php");
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <!-- /.container-fluid -->
 
