@@ -41,14 +41,17 @@ include("header.php");
                     <div class="col-12 order-2 order-md-3 order-lg-2 mb-4">
                         <div class="card">
                             <div class="card-header">
-                                <a href="crud_close.php?xCase=1" class="btn btn-primary"><i class="fa-solid fa-plus me-2"></i> เพิ่มข้อมูล</a>
+                                <div class="d-flex justify-content-end">
+                                    <a href="crud_close.php?xCase=1" class="btn btn-primary"><i
+                                            class="fa-solid fa-plus me-2"></i> เพิ่มข้อมูล</a>
+                                </div>
                             </div>
                             <div class="">
                                 <div class="card-body">
                                     <table id="myTable" class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>เลขที่เอกสาร</th>
+                                                <th style="width: 100px;">เลขที่เอกสาร</th>
                                                 <th>วันที่ปิดโครงการ</th>
                                                 <th>รหัสโครงการ</th>
                                                 <th>ต้นทุน</th>
@@ -62,21 +65,27 @@ include("header.php");
                                             if (mysqli_num_rows($data) > 0) {
                                                 while ($row = mysqli_fetch_assoc($data)) {
                                             ?>
-                                                    <tr>
-                                                        <th class="text-center sale_ID" style="width: 50px;">
-                                                            <?php echo $row['headcode']; ?></th>
-                                                        <th><?php echo $row['dateclose'] ?>
-                                                        </th>
-                                                        <td><?php echo $row['project_id']; ?></td>
-                                                        <td><?php echo $row['cost']; ?></td>
-                                                        <td><?php echo $row['pay']; ?></td>
-                                                        <td><?php echo $row['comment']; ?></td>
-                                                        <td class="text-center">
-                                                            <a href="crud_close.php?xCase=4&id=<?php echo $row['headcode'] ?>" name="btn_view" class="btn btn-info"><i class="fa-solid fa-address-card"></i></a>
-                                                            <a href="crud_close.php?xCase=2&id=<?php echo $row['headcode'] ?>" name="btn_edit" class="btn btn-warning edit_sale"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                            <a href="crud_close.php?xCase=3&id=<?php echo $row['headcode'] ?>" name="btn_delete" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
-                                                        </td>
-                                                    </tr>
+                                            <tr>
+                                                <th class="text-center sale_ID" style="width: 50px;">
+                                                    <?php echo $row['headcode']; ?></th>
+                                                <th><?php echo $row['dateclose'] ?>
+                                                </th>
+                                                <td><?php echo $row['project_id']; ?></td>
+                                                <td><?php echo $row['cost']; ?></td>
+                                                <td><?php echo $row['pay']; ?></td>
+                                                <td><?php echo $row['comment']; ?></td>
+                                                <td class="text-center">
+                                                    <a href="crud_close.php?xCase=4&id=<?php echo $row['headcode'] ?>"
+                                                        name="btn_view" class="btn btn-info"><i
+                                                            class="fa-solid fa-address-card"></i></a>
+                                                    <a href="crud_close.php?xCase=2&id=<?php echo $row['headcode'] ?>"
+                                                        name="btn_edit" class="btn btn-warning edit_sale"><i
+                                                            class="fa-solid fa-pen-to-square"></i></a>
+                                                    <a href="crud_close.php?xCase=3&id=<?php echo $row['headcode'] ?>"
+                                                        name="btn_delete" class="btn btn-danger"><i
+                                                            class="fa-solid fa-trash-can"></i></a>
+                                                </td>
+                                            </tr>
                                             <?php
                                                 }
                                             }
@@ -93,34 +102,34 @@ include("header.php");
                 </div>
                 <!-- /.container-fluid -->
                 <script>
-                    $.extend(true, $.fn.dataTable.defaults, {
-                        "language": {
-                            "sProcessing": "กำลังดำเนินการ...",
-                            "sLengthMenu": "แสดง _MENU_ แถว",
-                            "sZeroRecords": "ไม่พบข้อมูล",
-                            "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
-                            "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 แถว",
-                            "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
-                            "sInfoPostFix": "",
-                            "sSearch": "ค้นหา:",
-                            "sUrl": "",
-                            "oPaginate": {
-                                "sFirst": "เิริ่มต้น",
-                                "sPrevious": "ก่อนหน้า",
-                                "sNext": "ถัดไป",
-                                "sLast": "สุดท้าย"
-                            }
-                        },
-                        "lengthMenu": [
-                            [10, 15, 20],
-                            [10, 15, 20],
-                        ],
-                    });
-                    $('#myTable').DataTable({
-                        // order: [
-                        //     [0, 'desc']
-                        // ]
-                    });
+                $.extend(true, $.fn.dataTable.defaults, {
+                    "language": {
+                        "sProcessing": "กำลังดำเนินการ...",
+                        "sLengthMenu": "แสดง _MENU_ แถว",
+                        "sZeroRecords": "ไม่พบข้อมูล",
+                        "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
+                        "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 แถว",
+                        "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
+                        "sInfoPostFix": "",
+                        "sSearch": "ค้นหา:",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "เิริ่มต้น",
+                            "sPrevious": "ก่อนหน้า",
+                            "sNext": "ถัดไป",
+                            "sLast": "สุดท้าย"
+                        }
+                    },
+                    "lengthMenu": [
+                        [10, 15, 20],
+                        [10, 15, 20],
+                    ],
+                });
+                $('#myTable').DataTable({
+                    // order: [
+                    //     [0, 'desc']
+                    // ]
+                });
                 </script>
 
             </div>
