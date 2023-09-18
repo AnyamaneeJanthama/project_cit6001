@@ -51,8 +51,8 @@ include("header.php");
                                     <table id="myTable" class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">#</th>
-                                                <th width="150px">ชื่อโครงการ</th>
+                                                <th width="600px">ชื่อโครงการ</th>
+                                                <th width="150px">มูลค่าโครงการ</th>
                                                 <th>สถานะ</th>
                                                 <th class="text-center" style="width: 200px;">Action</th>
                                             </tr>
@@ -63,9 +63,8 @@ include("header.php");
                                                 while ($row = mysqli_fetch_assoc($data)) {
                                             ?>
                                                     <tr>
-                                                        <th class="text-center" style="width: 50px;">
-                                                            <?php echo $row['headcode']; ?></th>
                                                         <th><?php echo $row['project_name'] ?>
+                                                        <th><?php echo $row['project_valueprice'] ?>
                                                         <th><?php echo $row['status'] ?>
                                                         </th>
                                                         <td class="text-center">
