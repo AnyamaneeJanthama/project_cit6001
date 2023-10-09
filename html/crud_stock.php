@@ -33,14 +33,7 @@ if ($case == '1') {
         <div id="content">
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-            </nav>
+            <?php include("topbar.php") ?>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -77,9 +70,9 @@ if ($case == '1') {
                                     <div class="mt-2 text-center">
                                         <?php
                                         echo ($case == '1') ?
-                                            '<button type="submit" name="submit_pro" class="btn btn-success">Save</button> ' : (($case == '2') ?
-                                                '<button type="submit" name="submit_pro" class="btn btn-warning">Edit</button>' : (($case == '3') ?
-                                                    '<button type="submit" name="submit_pro" class="btn btn-danger">Delete</button>' : ''))
+                                            '<button type="submit" name="submit_pro" class="btn btn-success">บันทึก</button> ' : (($case == '2') ?
+                                                '<button type="submit" name="submit_pro" class="btn btn-warning">บันทึก</button>' : (($case == '3') ?
+                                                    '<button type="submit" name="submit_pro" class="btn btn-danger">ลบ</button>' : ''))
                                         ?>
                                         <!-- <button type="submit" name="submit" class="btn btn-success">บันทึก</button> -->
                                         <a href="stock.php" class="btn btn-secondary ms-3">Cancel</a>

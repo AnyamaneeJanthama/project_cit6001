@@ -55,4 +55,33 @@ switch ($case) {
         }
 
         break;
+    case 4:
+        $headcode = mysqli_real_escape_string($conn, $_GET['id']);
+
+        // SQL query to fetch project details
+        $sql = "SELECT * FROM `project_hd`JOIN project USING(project_id) JOIN employee USING(emp_id) WHERE headcode  = '$headcode' AND project_hd.void = 0";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $project_id = $row['project_id'];
+            $totalprice = $row['totalprice'];
+            $project_name = $row['project_name'];
+            $emp_id = $row['emp_id'];
+            $project_end = $row['project_end'];
+            $project_valueprice = $row['project_valueprice'];
+
+            $projectData = [
+                'project_id' => $project_id,
+                'project_name' => $project_name,
+                'emp_id' => $emp_id,
+                'totalprice' => $totalprice,
+                'project_end' => $project_end,
+                'project_valueprice' => $project_valueprice,
+            ];
+
+            echo json_encode($projectData);
+        } else {
+            echo "ไม่สามารถดึงข้อมูลโครงการได้: " . mysqli_error($conn);
+        }
 }

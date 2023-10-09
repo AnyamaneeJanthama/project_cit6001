@@ -26,8 +26,6 @@ if ($case == '1') {
     $result_value = mysqli_query($conn, "SELECT * FROM `project_hd` JOIN project_desc USING(headcode) WHERE project_hd.void =0 AND project_hd.headcode ='$id' ");
     $row = mysqli_fetch_array($result);
     $row_ = mysqli_fetch_array($result_hd);
-    $nn = mysqli_query($conn, "SELECT *,concat(SUBSTRING(datesave,9,2),SUBSTRING(datesave,6,2),headcode) as no_ FROM `project_hd`");
-    $no = mysqli_fetch_array($nn);
 }
 ?>
 
@@ -45,14 +43,7 @@ if ($case == '1') {
         <div id="content">
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-            </nav>
+            <?php include("topbar.php") ?>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -62,13 +53,12 @@ if ($case == '1') {
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <a class="h3 mb-0 text-gray-800" href="receipt.php">ข้อมูลค่าใช้จ่ายโครงการ</a>
                 </div>
-
                 <!-- Content Row -->
                 <div class="row">
                     <div class="col-12 order-2 order-md-3 order-lg-2 mb-4">
                         <div class="card mb-3">
                             <div class="text-end mt-3 mr-3">
-                                <?php echo ($case == 4) ? "NO." . $no['no_'] : '' ?>
+                                <?php echo ($case == 4) ? "NO." . $row['headcode'] : '' ?>
                             </div>
                             <div class="card-header text-center">
                                 <h3><?php echo $header; ?>ข้อมูลค่าใช้จ่ายโครงการ</h3>
@@ -164,12 +154,12 @@ if ($case == '1') {
                                     <div class="mt-2">
                                         <?php
                                         echo ($case == '1') ?
-                                            '<button type="submit" name="submit_frm" class="btn btn-success">บันทึก</button> ' : (($case == '2') ?
-                                                '<button type="submit" name="submit_frm" class="btn btn-warning">บันทึก</button>' : (($case == '3') ?
-                                                    '<button type="submit" name="submit_frm" class="btn btn-danger">ลบ</button>' : ''))
+                                            '<a href="receipt.php" class="btn btn-secondary mx-3">กลับ</a><button type="submit" name="submit_frm" class="btn btn-success">บันทึก</button> ' : (($case == '2') ?
+                                                '<a href="receipt.php" class="btn btn-secondary mx-3">กลับ</a><button type="submit" name="submit_frm" class="btn btn-warning">บันทึก</button>' : (($case == '3') ?
+                                                    '<a href="receipt.php" class="btn btn-secondary mx-3">กลับ</a><button type="submit" name="submit_frm" class="btn btn-danger">ลบ</button>' : '<a href="receipt.php" class="btn btn-secondary mx-3">กลับ</a>'))
                                         ?>
                                         <!-- <button type="submit" name="submit" class="btn btn-success">บันทึก</button> -->
-                                        <a href="receipt.php" class="btn btn-secondary ms-3">ยกเลิก</a>
+
                                     </div>
                                 </form>
                             </div>
@@ -249,7 +239,17 @@ if ($case == '1') {
                             });
                         }
                     }
-
+                    const deleteButtonCell = document.createElement('td');
+                    const deleteButton = document.createElement('button');
+                    deleteButton.type = 'button';
+                    deleteButton.classList.add('btn', 'btn-danger');
+                    deleteButton.textContent = 'ลบ';
+                    deleteButton.addEventListener('click', function() {
+                        table.deleteRow(newRow.rowIndex);
+                        calculateGrandTotal(); // ทำการคำนวนใหม่
+                    });
+                    deleteButtonCell.appendChild(deleteButton);
+                    newRow.appendChild(deleteButtonCell);
                     tbody.appendChild(newRow);
                 }
             </script>

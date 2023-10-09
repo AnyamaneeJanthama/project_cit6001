@@ -61,14 +61,7 @@ if ($case == '1') {
         <div id="content">
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-            </nav>
+            <?php include("topbar.php") ?>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -79,11 +72,12 @@ if ($case == '1') {
                     <a class="h3 mb-0 text-gray-800" href="project.php">ข้อมูลโครงการ</a>
                 </div>
 
+
                 <!-- Content Row -->
                 <div class="row">
-                    <div class="col-12 order-2 order-md-3 order-lg-2 mb-4">
+                    <div class="col-12 order-2 order-md-3 order-lg-2">
                         <div class="card">
-                            <div class="card-header text-center">
+                            <div class="card-header text-center4">
                                 <h3><?php echo $header; ?>ข้อมูลโครงการ</h3>
                             </div>
                             <div class="card-body">
@@ -111,15 +105,15 @@ if ($case == '1') {
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="project_start" class="form-label">วันที่เริ่มโครงการ</label>
-                                            <input type="date" class="form-control" name="project_start" id="project_start" placeholder="ที่อยู่" value="<?php echo ($case == 1) ? '' : $row['project_start'] ?>" <?php echo ($case == '3' || $case == '4') ? 'readonly' : 'required' ?>>
+                                            <input type="date" class="form-control" name="project_start" id="project_start" value="<?php echo ($case == 1) ? '' : $row['project_start'] ?>" <?php echo ($case == '3' || $case == '4') ? 'readonly' : 'required' ?>>
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="project_end" class="form-label">วันที่สิ้นสุดโครงการ</label>
-                                            <input type="date" class="form-control" name="project_end" id="project_end" placeholder="ตำบล" value="<?php echo ($case == 1) ? '' : $row['project_end'] ?>" <?php echo ($case == '3' || $case == '4') ? 'readonly' : 'required' ?>>
+                                            <input type="date" class="form-control" name="project_end" id="project_end" value="<?php echo ($case == 1) ? '' : $row['project_end'] ?>" <?php echo ($case == '3' || $case == '4') ? 'readonly' : 'required' ?>>
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="project_valueprice" class="form-label">มูลค่าโครงการ</label>
-                                            <input type="text" class="form-control" name="project_valueprice" id="project_valueprice" placeholder="อำเภอ" value="<?php echo ($case == 1) ? '' : $row['project_valueprice'] ?>" <?php echo ($case == '3' || $case == '4') ? 'readonly' : 'required' ?>>
+                                            <input type="number" class="form-control" name="project_valueprice" id="project_valueprice" placeholder="ป้อนมูลค่าโครงการ" value="<?php echo ($case == 1) ? '' : $row['project_valueprice'] ?>" <?php echo ($case == '3' || $case == '4') ? 'readonly' : 'required' ?>>
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="cus_id" class="form-label">ผู้ดูแลโครงการ</label>
@@ -151,13 +145,12 @@ if ($case == '1') {
                                     <div class="text-center mt-2">
                                         <?php
                                         echo ($case == '1') ?
-                                            '<button type="submit" name="submit_frm" class="btn btn-success">บันทึก</button> ' : (($case == '2') ?
-                                                '<button type="submit" name="submit_frm" class="btn btn-warning">บันทึก</button>' : (($case == '3') ?
-                                                    '<button type="submit" name="submit_frm" class="btn btn-danger">ลบ</button>' : (($case == '4') ?
-                                                        '' : '')))
+                                            '<a href="project.php" class="btn btn-secondary mx-3">กลับ</a><button type="submit" name="submit_frm" class="btn btn-success">บันทึก</button> ' : (($case == '2') ?
+                                                '<a href="project.php" class="btn btn-secondary mx-3">กลับ</a><button type="submit" name="submit_frm" class="btn btn-warning">บันทึก</button>' : (($case == '3') ?
+                                                    '<a href="project.php" class="btn btn-secondary mx-3">กลับ</a><button type="submit" name="submit_frm" class="btn btn-danger">ลบ</button>' : (($case == '4') ?
+                                                        '<a href="project.php" class="btn btn-secondary mx-3">กลับ</a>' : '')))
                                         ?>
                                         <!-- <button type="submit" name="submit" class="btn btn-success">บันทึก</button> -->
-                                        <a href="project.php" class="btn btn-secondary ms-3">ยกเลิก</a>
                                     </div>
                                 </form>
                             </div>
