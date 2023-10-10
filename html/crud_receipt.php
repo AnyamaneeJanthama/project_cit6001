@@ -15,8 +15,8 @@ if ($case == '1') {
     $result_value = mysqli_query($conn, "SELECT * FROM `project_hd` JOIN project_desc USING(headcode) WHERE project_hd.void =0 AND project_hd.headcode ='$id' ");
     $row = mysqli_fetch_array($result);
     $row_ = mysqli_fetch_array($result_hd);
-    $nn = mysqli_query($conn, "SELECT *,concat(SUBSTRING(datesave,9,2),SUBSTRING(datesave,6,2),headcode) as no_ FROM `project_hd`");
-    $no = mysqli_fetch_array($nn);
+    // $nn = mysqli_query($conn, "SELECT *,concat(SUBSTRING(datesave,9,2),SUBSTRING(datesave,6,2),headcode) as no_ FROM `project_hd`");
+    // $no = mysqli_fetch_array($nn);
 } else if ($case  == '4') {
     $header = 'รายละเอียด';
     $id = $_GET['id'];
@@ -124,7 +124,7 @@ if ($case == '1') {
                                             if ($case == 1) {
                                                 echo '
                                                    ';
-                                            } elseif ($case == 4) {
+                                            } elseif ($case == 3 || $case == 4) {
                                                 $sum = 0;
 
                                                 foreach ($result_value as $rowselect) {
@@ -146,7 +146,7 @@ if ($case == '1') {
                                                     <th></th>
                                                     <th class="text-center">รวมมูลค่าสินค้า</th>
                                                     <th class="text-center" id="grandTotal">
-                                                        <?php echo ($case == 4) ? $sum : '' ?></th>
+                                                        <?php echo ($case == 3 || $case == 4) ? $sum : '' ?></th>
                                                 </tr>
                                             </thead>
                                         </tbody>
@@ -239,6 +239,7 @@ if ($case == '1') {
                             });
                         }
                     }
+
                     const deleteButtonCell = document.createElement('td');
                     const deleteButton = document.createElement('button');
                     deleteButton.type = 'button';
