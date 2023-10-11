@@ -68,7 +68,7 @@ if ($case == '1') {
                                                     $isSelected = ($rowselect['headcode'] == $row['headcode']) ? 'selected' : '';
                                                 ?>
                                                     <option value="<?php echo $rowselect['headcode']; ?>" <?php echo $isSelected; ?>>
-                                                        <?php echo $rowselect['headcode'] ?>
+                                                        <?php echo $rowselect['headcode'] . " - " . $rowselect['project_name'] ?>
                                                     </option>
                                                 <?php
                                                 }

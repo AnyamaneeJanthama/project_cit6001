@@ -19,11 +19,14 @@ switch ($case) {
             }
         }
 
-        $spl = mysqli_query($conn, "INSERT INTO stock VALUES ('$id','$s_name','$s_unit','$s_price',0)");
+        $zeroid = "0000" . $id; // เอาเลข 0 เติมให้ครบ 4 หลัก
+        $zeroid = substr($zeroid, -4); // เอาเฉพาะ 4 ตัวหลัง
+
+        $spl = mysqli_query($conn, "INSERT INTO stock VALUES ('$zeroid','$s_name','$s_unit','$s_price',0)");
         if (!$spl) {
-            echo json_encode(array('title' => 'Unsuccessfully!', 'status' => 'error', 'message' => 'Inserted data is not success.'));
+            echo json_encode(array('title' => 'ดำเนินการไม่สำเร็จ!', 'status' => 'error', 'message' => 'ข้อมูลยังไม่ถูกบันทึก โปรดตรวจสอบความถูกต้อง'));
         } else {
-            echo json_encode(array('title' => 'Successfully!', 'status' => 'success', 'message' => 'Inserted data is successfully.'));
+            echo json_encode(array('title' => 'ดำเนินการสำเร็จ!', 'status' => 'success', 'message' => 'การดำเนินการบันทึกข้อมูลเสร็จสมบูรณ์'));
         }
         break;
 
@@ -34,9 +37,9 @@ switch ($case) {
 
         $spl = mysqli_query($conn, "UPDATE stock SET s_name = '$s_name', s_unit = '$s_unit',s_price = '$s_price' WHERE s_id = $id");
         if (!$spl) {
-            echo json_encode(array('title' => 'Unsuccessfully!', 'status' => 'error', 'message' => 'Updated data is not success.'));
+            echo json_encode(array('title' => 'ดำเนินการไม่สำเร็จ!', 'status' => 'error', 'message' => 'ข้อมูลยังไม่ถูกไม่เปลี่ยนแปลง โปรดตรวจสอบความถูกต้อง'));
         } else {
-            echo json_encode(array('title' => 'Successfully!', 'status' => 'success', 'message' => 'Updated data is successfully.'));
+            echo json_encode(array('title' => 'ดำเนินการสำเร็จ!', 'status' => 'success', 'message' => 'การดำเนินการเปลี่ยนแปลงข้อมูลเสร็จสมบูรณ์'));
         }
         break;
 
@@ -44,9 +47,9 @@ switch ($case) {
         $id = $_GET['id'];
         $spl = mysqli_query($conn, "UPDATE stock SET void = '1' WHERE s_id = $id");
         if (!$spl) {
-            echo json_encode(array('title' => 'Unsuccessfully!', 'status' => 'error', 'message' => 'Deleted data is not success.'));
+            echo json_encode(array('title' => 'ดำเนินการไม่สำเร็จ!', 'status' => 'error', 'message' => 'ข้อมูลยังไม่ถูกลบ โปรดตรวจสอบความถูกต้อง'));
         } else {
-            echo json_encode(array('title' => 'Successfully!', 'status' => 'success', 'message' => 'Deleted data is successfully.'));
+            echo json_encode(array('title' => 'ดำเนินการสำเร็จ!', 'status' => 'success', 'message' => 'การดำเนินการลบข้อมูลเสร็จสมบูรณ์'));
         }
         break;
 }

@@ -56,9 +56,9 @@ switch ($case) {
 
         $spl = mysqli_query($conn, "INSERT INTO project_hd (headcode, datesave, receiptcode, datereceipt, project_id, totalprice, status, void) VALUES ('$docno','$datesave','$receiptcode','$datereceipt','$project_id','$totalprice', 1 ,0)");
         if (!$spl) {
-            echo json_encode(array('title' => 'Unsuccessfully!', 'status' => 'error', 'message' => 'Inserted data is not success.'));
+            echo json_encode(array('title' => 'ดำเนินการไม่สำเร็จ!', 'status' => 'error', 'message' => 'ข้อมูลยังไม่ถูกบันทึก โปรดตรวจสอบความถูกต้อง'));
         } else {
-            echo json_encode(array('title' => 'Successfully!', 'status' => 'success', 'message' => 'Inserted data is successfully.'));
+            echo json_encode(array('title' => 'ดำเนินการสำเร็จ!', 'status' => 'success', 'message' => 'การดำเนินการบันทึกข้อมูลเสร็จสมบูรณ์'));
         }
         break;
 
@@ -72,18 +72,18 @@ switch ($case) {
         $spl = mysqli_query($conn, "UPDATE project_hd SET datesave = '$datesave', receiptcode = '$receiptcode',datereceipt = '$datereceipt'
         ,project_id = '$project_id',totalprice = '$totalprice' WHERE project_id = $id");
         if (!$spl) {
-            echo json_encode(array('title' => 'Unsuccessfully!', 'status' => 'error', 'message' => 'Updated data is not success.'));
+            echo json_encode(array('title' => 'ดำเนินการไม่สำเร็จ!', 'status' => 'error', 'message' => 'ข้อมูลยังไม่ถูกไม่เปลี่ยนแปลง โปรดตรวจสอบความถูกต้อง'));
         } else {
-            echo json_encode(array('title' => 'Successfully!', 'status' => 'success', 'message' => 'Updated data is successfully.'));
+            echo json_encode(array('title' => 'ดำเนินการสำเร็จ!', 'status' => 'success', 'message' => 'การดำเนินการเปลี่ยนแปลงข้อมูลเสร็จสมบูรณ์'));
         }
         break;
     case 3:
         $id = $_GET['id'];
         $spl = mysqli_query($conn, "UPDATE project_hd SET void = '1' WHERE headcode = $id");
         if (!$spl) {
-            echo json_encode(array('title' => 'Unsuccessfully!', 'status' => 'error', 'message' => 'Deleted data is not success.'));
+            echo json_encode(array('title' => 'ดำเนินการไม่สำเร็จ!', 'status' => 'error', 'message' => 'ข้อมูลยังไม่ถูกลบ โปรดตรวจสอบความถูกต้อง'));
         } else {
-            echo json_encode(array('title' => 'Successfully!', 'status' => 'success', 'message' => 'Deleted data is successfully.'));
+            echo json_encode(array('title' => 'ดำเนินการสำเร็จ!', 'status' => 'success', 'message' => 'การดำเนินการลบข้อมูลเสร็จสมบูรณ์'));
         }
         break;
     case 4:
@@ -114,5 +114,31 @@ switch ($case) {
             echo json_encode($projectData);
         } else {
             echo "ไม่สามารถดึงข้อมูลโครงการได้: " . mysqli_error($conn);
+        }
+        break;
+    case 5:
+        $s_id = mysqli_real_escape_string($conn, $_GET['id']);
+
+        // SQL query to fetch project details
+        $sql = "SELECT * FROM `stock` WHERE s_id = '$s_id' AND void = 0 ";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $s_name = $row['s_name'];
+            $s_unit = $row['s_unit'];
+            $s_price = $row['s_price'];
+
+            // Create an array to hold project data and echo it as JSON
+            $stockData = [
+                's_id' => $s_id,
+                's_name' => $s_name,
+                's_unit' => $s_unit,
+                's_price' => $s_price
+            ];
+
+            echo json_encode($stockData);
+        } else {
+            echo "ไม่สามารถดึงข้อมูลสินค้าได้: " . mysqli_error($conn);
         }
 }

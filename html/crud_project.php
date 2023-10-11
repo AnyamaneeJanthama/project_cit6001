@@ -105,11 +105,11 @@ if ($case == '1') {
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="project_start" class="form-label">วันที่เริ่มโครงการ</label>
-                                            <input type="date" class="form-control" name="project_start" id="project_start" value="<?php echo ($case == 1) ? '' : $row['project_start'] ?>" <?php echo ($case == '3' || $case == '4') ? 'readonly' : 'required' ?>>
+                                            <input type="date" class="form-control" name="project_start" id="project_start" value="<?php echo ($case == 1) ? date('Y-m-d') : $row['project_start'] ?>" <?php echo ($case == '3' || $case == '4') ? 'readonly' : 'required' ?>>
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="project_end" class="form-label">วันที่สิ้นสุดโครงการ</label>
-                                            <input type="date" class="form-control" name="project_end" id="project_end" value="<?php echo ($case == 1) ? '' : $row['project_end'] ?>" <?php echo ($case == '3' || $case == '4') ? 'readonly' : 'required' ?>>
+                                            <input type="date" class="form-control" name="project_end" id="project_end" value="<?php echo ($case == 1) ? date('Y-m-d', strtotime(' +1 year')) : $row['project_end'] ?>" <?php echo ($case == '3' || $case == '4') ? 'readonly' : 'required' ?>>
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="project_valueprice" class="form-label">มูลค่าโครงการ</label>
@@ -134,10 +134,8 @@ if ($case == '1') {
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="" class="form-label">สถานะโครงการ</label>
                                             <select class="form-select" aria-label="Default select example" name="project_status" id="project_status" <?php echo ($case == '3' || $case == '4') ? 'disabled' : 'required' ?>>
-                                                <option value="" hidden>
-                                                    <?php echo ($case == 1) ? 'เลือกสถานะ' : $row['status'] ?></option>
                                                 <option value="0">ยกเลิก</option>
-                                                <option value="1">อยู่ระหว่างดำเนินการ</option>
+                                                <option value="1" selected>อยู่ระหว่างดำเนินการ</option>
                                                 <option value="2">ปิดโครงการ</option>
                                             </select>
                                         </div>

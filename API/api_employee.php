@@ -28,12 +28,15 @@ switch ($case) {
             }
         }
 
-        $spl = mysqli_query($conn, "INSERT INTO employee VALUES ('$id','$emp_firstname','$emp_lastname','$emp_address','$emp_subdis',
+        $zeroid = "0000" . $id; // เอาเลข 0 เติมให้ครบ 4 หลัก
+        $zeroid = substr($zeroid, -4); // เอาเฉพาะ 4 ตัวหลัง
+
+        $spl = mysqli_query($conn, "INSERT INTO employee VALUES ('$zeroid','$emp_firstname','$emp_lastname','$emp_address','$emp_subdis',
         '$emp_district', '$emp_province','$emp_postcode','$emp_phone','$emp_email','$emp_startworking','$emp_password','$emp_department',0)");
         if (!$spl) {
-            echo json_encode(array('title' => 'Unsuccessfully!', 'status' => 'error', 'message' => 'Inserted data is not success.'));
+            echo json_encode(array('title' => 'ดำเนินการไม่สำเร็จ!', 'status' => 'error', 'message' => 'ข้อมูลยังไม่ถูกบันทึก โปรดตรวจสอบความถูกต้อง'));
         } else {
-            echo json_encode(array('title' => 'Successfully!', 'status' => 'success', 'message' => 'Inserted data is successfully.'));
+            echo json_encode(array('title' => 'ดำเนินการสำเร็จ!', 'status' => 'success', 'message' => 'การดำเนินการบันทึกข้อมูลเสร็จสมบูรณ์'));
         }
         break;
     case 2: //Update
@@ -55,18 +58,18 @@ switch ($case) {
         emp_phone = '$emp_phone', emp_email = '$emp_email',emp_startworking = '$emp_startworking' , emp_password = '$emp_password'
         , emp_department = '$emp_department' Where emp_id = $id");
         if (!$spl) {
-            echo json_encode(array('title' => 'Unsuccessfully!', 'status' => 'error', 'message' => 'IUpdated data is not success.'));
+            echo json_encode(array('title' => 'ดำเนินการไม่สำเร็จ!', 'status' => 'error', 'message' => 'ข้อมูลยังไม่ถูกไม่เปลี่ยนแปลง โปรดตรวจสอบความถูกต้อง'));
         } else {
-            echo json_encode(array('title' => 'Successfully!', 'status' => 'success', 'message' => 'Updated data is successfully.'));
+            echo json_encode(array('title' => 'ดำเนินการสำเร็จ!', 'status' => 'success', 'message' => 'การดำเนินการเปลี่ยนแปลงข้อมูลเสร็จสมบูรณ์'));
         }
         break;
     case 3:
         $id = $_GET['id'];
         $spl = mysqli_query($conn, "UPDATE employee SET void = '1' Where emp_id = $id");
         if (!$spl) {
-            echo json_encode(array('title' => 'Unsuccessfully!', 'status' => 'error', 'message' => 'Deleted data is not success.'));
+            echo json_encode(array('title' => 'ดำเนินการไม่สำเร็จ!', 'status' => 'error', 'message' => 'ข้อมูลยังไม่ถูกลบ โปรดตรวจสอบความถูกต้อง'));
         } else {
-            echo json_encode(array('title' => 'Successfully!', 'status' => 'success', 'message' => 'Deleted data is successfully.'));
+            echo json_encode(array('title' => 'ดำเนินการสำเร็จ!', 'status' => 'success', 'message' => 'การดำเนินการลบข้อมูลเสร็จสมบูรณ์'));
         }
         break;
 }

@@ -97,11 +97,11 @@ if ($case == '1') {
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="emp_startworking" class="form-label">วันที่เริ่มงาน</label>
-                                            <input type="date" class="form-control" name="emp_startworking" id="emp_startworking" placeholder="วันที่เริ่มงาน" value="<?php echo ($case == 1) ? '' : $row['emp_startworking'] ?>" <?php echo ($case == '3' || $case == 4) ? 'readonly' : 'required' ?>>
+                                            <input type="date" class="form-control" name="emp_startworking" id="emp_startworking" placeholder="วันที่เริ่มงาน" value="<?php echo ($case == 1) ? date('Y-m-d') : $row['emp_startworking'] ?>" <?php echo ($case == '3' || $case == 4) ? 'readonly' : 'required' ?>>
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="emp_password" class="form-label">รหัสผ่าน</label>
-                                            <input type="text" class="form-control" name="emp_password" id="emp_password" placeholder="รหัสผ่าน" value="<?php echo ($case == 1) ? '' : $row['emp_password'] ?>" <?php echo ($case == '3' || $case == 4) ? 'readonly' : 'required' ?>>
+                                            <input type="password" class="form-control" name="emp_password" id="emp_password" placeholder="รหัสผ่าน" value="<?php echo ($case == 1) ? '' : $row['emp_password'] ?>" <?php echo ($case == '3' || $case == 4) ? 'readonly' : 'required' ?>>
                                         </div>
                                         <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
                                             <label for="emp_department" class="form-label">แผนก</label>

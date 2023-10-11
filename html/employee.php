@@ -44,6 +44,7 @@ include("header.php");
                                     <table id="myTable" class="table table-striped">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th width="150px">Name</th>
                                                 <th>Email</th>
                                                 <th>Department</th>
@@ -57,6 +58,7 @@ include("header.php");
                                                 while ($row = mysqli_fetch_assoc($data)) {
                                             ?>
                                                     <tr>
+                                                        <td><?php echo $row['emp_id']; ?></td>
                                                         <th><?php echo $row['emp_firstname'], " ", $row['emp_lastname']; ?>
                                                         </th>
                                                         <td><?php echo $row['emp_email']; ?></td>

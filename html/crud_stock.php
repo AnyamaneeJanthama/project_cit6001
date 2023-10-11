@@ -54,15 +54,15 @@ if ($case == '1') {
                             <div class="card-body">
                                 <form id="formAccountSettings" action="../API/api_stock.php?xCase=<?php echo $case ?>&id=<?php echo $id ?>" method="POST">
                                     <div class="row">
-                                        <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
+                                        <div class="mb-2 col-lg-8 col-md-6 col-ms-12">
                                             <label for="s_name" class="form-label">สินค้า</label>
                                             <input type="text" class="form-control" name="s_name" id="s_name" placeholder="Enter product name" value="<?php echo ($case == 1) ? '' : $row['s_name'] ?>" <?php echo ($case == '3') ? 'readonly' : 'required' ?>>
                                         </div>
-                                        <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
+                                        <div class="mb-2 col-lg-2 col-md-6 col-ms-12">
                                             <label for="s_price" class="form-label">ราคา/หน่วย</label>
                                             <input type="text" class="form-control" name="s_price" id="s_price" placeholder="0.00" value="<?php echo ($case == 1) ? '' : $row['s_price'] ?>" <?php echo ($case == '3') ? 'readonly' : 'required' ?>>
                                         </div>
-                                        <div class="mb-2 col-lg-4 col-md-6 col-ms-12">
+                                        <div class="mb-2 col-lg-2 col-md-6 col-ms-12">
                                             <label for="s_unit" class="form-label">หน่วยนับ</label>
                                             <input type="text" class="form-control" name="s_unit" id="s_unit" placeholder="Enter Product description" value="<?php echo ($case == 1) ? '' : $row['s_unit'] ?>" <?php echo ($case == '3') ? 'readonly' : 'required' ?>>
                                         </div>

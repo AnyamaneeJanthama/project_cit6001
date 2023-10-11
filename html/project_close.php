@@ -1,6 +1,6 @@
 <?php
 include("connect.php");
-$data = mysqli_query($conn, "SELECT * from project_close WHERE void = 0 ORDER BY headcode");
+$data = mysqli_query($conn, "SELECT * from project_close JOIN project USING(project_id) WHERE project_close.void = 0 ORDER BY headcode");
 include("header.php");
 ?>
 
@@ -45,7 +45,7 @@ include("header.php");
                                             <tr>
                                                 <th style="width: 100px;">เลขที่เอกสาร</th>
                                                 <th>วันที่ปิดโครงการ</th>
-                                                <th>รหัสโครงการ</th>
+                                                <th>โครงการ</th>
                                                 <th>ต้นทุน</th>
                                                 <th>ค่าใช้จ่าย</th>
                                                 <th>หมายเหตุ</th>
@@ -62,7 +62,7 @@ include("header.php");
                                                             <?php echo $row['headcode']; ?></th>
                                                         <th><?php echo $row['dateclose'] ?>
                                                         </th>
-                                                        <td><?php echo $row['project_id']; ?></td>
+                                                        <td><?php echo $row['project_name']; ?></td>
                                                         <td><?php echo $row['cost']; ?></td>
                                                         <td><?php echo $row['pay']; ?></td>
                                                         <td><?php echo $row['comment']; ?></td>

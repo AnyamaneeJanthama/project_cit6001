@@ -44,6 +44,7 @@ include("header.php");
                                     <table id="myTable" class="table table-striped">
                                         <thead>
                                             <tr>
+                                                <th width="100px">เลขที่เอกสาร</th>
                                                 <th width="600px">ชื่อโครงการ</th>
                                                 <th width="150px">มูลค่าโครงการ</th>
                                                 <th>สถานะ</th>
@@ -56,6 +57,7 @@ include("header.php");
                                                 while ($row = mysqli_fetch_assoc($data)) {
                                             ?>
                                                     <tr>
+                                                        <th><?php echo $row['headcode'] ?>
                                                         <th><?php echo $row['project_name'] ?>
                                                         <th><?php echo $row['project_valueprice'] ?>
                                                         <th><?php echo $row['status'] ?>
