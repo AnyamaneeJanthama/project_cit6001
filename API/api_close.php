@@ -8,6 +8,7 @@ $case = $_GET['xCase'];
 $id = $_GET['id'];
 switch ($case) {
     case 1: //insert customer
+        $headcode = $_POST['headcode'];
         $dateclose = $_POST['dateclose'];
         $project_id = $_POST['project_id'];
         $cost = $_POST['cost'];
@@ -15,14 +16,7 @@ switch ($case) {
         $emp_id = $_POST['emp_id'];
         $comment = $_POST['comment'];
 
-        $maxID = mysqli_query($conn, "SELECT MAX(headcode) AS id FROM project_close ORDER BY headcode");
-        if (mysqli_num_rows($maxID) > 0) {
-            while ($row = mysqli_fetch_assoc($maxID)) {
-                $id = $row['id'] + 1;
-            }
-        }
-
-        $spl = mysqli_query($conn, "INSERT INTO project_close VALUES ('$id','$dateclose','$project_id','$cost','$pay','$emp_id', '$comment',0)");
+        $spl = mysqli_query($conn, "INSERT INTO project_close VALUES ('$headcode','$dateclose','$project_id','$cost','$pay','$emp_id', '$comment',0)");
         if (!$spl) {
             echo json_encode(array('title' => 'Unsuccessfully!', 'status' => 'error', 'message' => 'Inserted data is not success.'));
         } else {

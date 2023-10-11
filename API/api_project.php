@@ -31,6 +31,7 @@ switch ($case) {
             echo json_encode(array('title' => 'Successfully!', 'status' => 'success', 'message' => 'Inserted data is successfully.'));
         }
         break;
+
     case 2: //Update
         $project_name = $_POST['project_name'];
         $cus_id = $_POST['cus_id'];
